@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Simple echo WebSocket server for testing
+  echo-server:
+    image: jmalloc/echo-server
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+    networks:
+      - websocket-test
+
+  # Streamlit app for development
+  streamlit-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    environment:
+      - STREAMLIT_WEBSOCKET_DEVELOP=true
+    networks:
+      - websocket-test
+    depends_on:
+      - echo-server
+
+networks:
+  websocket-test:
+    driver: bridge

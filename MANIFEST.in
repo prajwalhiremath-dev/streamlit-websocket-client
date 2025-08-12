@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include requirements.txt
+recursive-include streamlit_websocket_client/frontend/build *
+recursive-exclude streamlit_websocket_client/frontend/node_modules *
+recursive-exclude streamlit_websocket_client/frontend/src *
+global-exclude *.pyc
+global-exclude __pycache__
